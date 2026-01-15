@@ -18,13 +18,14 @@ END_DATE   = "2025-11-28"
 
 FILE_TICKER = "issuer_code.txt"
 FILE_HOL    = "holiday.txt"
-BASE_URL = "https://exodus.stockbit.com/marketdetectors"
 
+BASE_URL = os.getenv("MARKET_DETECTOR_API_URL")
 TOKEN = os.getenv("AUTH_TOKEN")
+
 HEADERS = {
     "Authorization": f"Bearer {TOKEN}",
     "Accept": "application/json",
-    "User-Agent": "exodus-client/1.0"
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
 }
 BASE_PARAMS = {
     "transaction_type": "TRANSACTION_TYPE_NET",
