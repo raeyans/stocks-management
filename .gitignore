@@ -48,6 +48,7 @@ coverage.xml
 
 # macOS
 .DS_Store
+Thumbs.db
 
 # Logs
 *.log
@@ -62,3 +63,18 @@ files/
 # dotenv
 .env
 .env.*
+
+issuer_code_temp.txt
+payment-paid.tex
+terbilang.py
+
+balance/
+data/
+DUMP/
+files/
+foreign/
+foreign-out/
+output/
+reports/
+trade/
+views/
