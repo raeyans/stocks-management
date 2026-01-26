@@ -508,8 +508,12 @@ def build_pnl_summary_payload(root_buy_id: int, group_rows: List[Dict[str, Any]]
     }
 
 def pnl_summary_exists(client: Client, payload: Dict[str, Any]) -> bool:
-    pnl_trx_ref = payload.get("pnl_trx_ref")
-    if pnl_trx_ref is not None:
+    # pnl_trx_ref = payload.get("pnl_trx_ref")
+
+    # if pnl_trx_ref is None:
+    pnl_trx_ref = int(payload.get("pnl_trx_ref"))
+    
+    if pnl_trx_ref > 0:
         resp = (
             client.table("pnl_summary")
             .select("pnl_id")
@@ -518,9 +522,12 @@ def pnl_summary_exists(client: Client, payload: Dict[str, Any]) -> bool:
             .limit(1)
             .execute()
         )
-        if (resp.data or []):
+        if (resp.data):
             return True
+        
+        return False
     
+    # print(payload)
     resp = (
         client.table("pnl_summary")
         .select("pnl_id")
@@ -532,7 +539,11 @@ def pnl_summary_exists(client: Client, payload: Dict[str, Any]) -> bool:
         .limit(1)
         .execute()
     )
-    return len(resp.data or []) > 0
+    # return len(resp.data or []) > 0
+    if (resp.data):
+        return True
+    
+    return False
 
 def insert_pnl_summary(client: Client, payload: Dict[str, Any]) -> None:
     client.table("pnl_summary").insert(payload).execute()
